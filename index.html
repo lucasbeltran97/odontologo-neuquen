@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odontólogo Lucas Beltrán | Odontología</title>
+<meta name="description" content="Odontólogo Lucas Beltrán. Limpiezas, blanqueamiento, ortodoncia, implantes y endodoncia. Agendá tu turno hoy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F3D63;
+    --navy-deep:#082B47;
+    --navy-soft:#2C74B3;
+    --silver:#AEBDCB;
+    --silver-deep:#5C7285;
+    --silver-light:#E4EAF0;
+    --accent:var(--silver-deep);
+    --accent-deep:var(--navy-soft);
+    --sand:#F7F4EC;
+    --white:#ffffff;
+    --ice:#F4F9FD;
+    --ice-deep:#E5F0FA;
+    --text:var(--navy);
+    --text-light:rgba(15,61,99,0.64);
+    --shadow: 0 16px 40px rgba(15,61,99,0.14);
+    --radius: 18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--text);
+    background:var(--white);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h3{font-family:'Montserrat',sans-serif;}
+  h1,h2{font-family:'Playfair Display',serif;font-weight:600;letter-spacing:-.01em;}
+  h1 em, h2 em{font-style:italic;font-weight:500;color:var(--navy-soft);}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .container{width:100%;max-width:1140px;margin:0 auto;padding:0 24px;}
+  section{padding:76px 0;}
+
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .65s cubic-bezier(.16,.84,.44,1), transform .65s cubic-bezier(.16,.84,.44,1);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .reveal.d1{transition-delay:.08s;}
+  .reveal.d2{transition-delay:.18s;}
+  .reveal.d3{transition-delay:.28s;}
+  .reveal.d4{transition-delay:.38s;}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:15px 32px;border-radius:3px;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;
+    letter-spacing:.06em;text-transform:uppercase;
+    cursor:pointer;border:none;transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .btn-primary{background:linear-gradient(120deg,var(--navy-deep),var(--navy-soft) 55%,var(--silver));color:var(--white);box-shadow:0 10px 24px rgba(92,114,133,.3);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(92,114,133,.42);}
+  .btn-outline{background:transparent;border:2px solid var(--navy);color:var(--navy);}
+  .btn-outline:hover{background:var(--navy);color:var(--white);}
+  .btn-nav{background:var(--white);color:var(--navy);}
+  .btn-nav:hover{transform:translateY(-2px);background:var(--ice);}
+  .btn-outline-light{border-color:rgba(255,255,255,.7);color:var(--white);}
+  .btn-outline-light:hover{background:var(--white);color:var(--navy);}
+
+  /* Header */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--navy);box-shadow:0 2px 20px rgba(15,61,99,0.25);}
+  header::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--navy-deep),var(--navy-soft),var(--silver),var(--navy-soft),var(--navy-deep));
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1140px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:12px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:19px;letter-spacing:.03em;color:var(--white);}
+  .logo span{color:var(--white);font-weight:500;opacity:.85;}
+  .logo-icon{width:38px;height:38px;object-fit:cover;border-radius:50%;background:var(--white);padding:2px;box-shadow:0 0 0 1px rgba(255,255,255,.15);}
+  .nav-links{display:flex;gap:32px;list-style:none;}
+  .nav-links a{position:relative;font-weight:500;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:rgba(255,255,255,0.85);transition:color .2s;}
+  .nav-links a::after{
+    content:"";position:absolute;left:0;right:100%;bottom:-4px;height:1.5px;
+    background:var(--silver);transition:right .25s ease;
+  }
+  .nav-links a:hover::after{right:0;}
+  .nav-links a:hover{color:var(--white);}
+  .nav-cta{display:none;}
+  .menu-toggle{display:none;background:none;border:none;font-size:26px;cursor:pointer;color:var(--white);}
+  @media(max-width:768px){
+    .nav-links{position:fixed;top:64px;left:0;right:0;background:var(--navy-deep);flex-direction:column;gap:0;max-height:0;overflow:hidden;transition:max-height .35s ease;box-shadow:0 10px 20px rgba(0,0,0,0.2);}
+    .nav-links.open{max-height:320px;}
+    .nav-links li{width:100%;border-top:1px solid rgba(255,255,255,0.12);}
+    .nav-links a{display:block;padding:16px 24px;}
+    .menu-toggle{display:block;}
+  }
+  @media(min-width:769px){ .nav-cta{display:inline-flex;} }
+
+  /* HERO — foto enmarcada al costado (no de fondo), para que se aprecie completa */
+  .hero{
+    position:relative;overflow:hidden;
+    background:linear-gradient(160deg,var(--navy-deep) 0%,var(--navy) 100%);
+    padding:150px 0 76px;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;}
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--silver-light);
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;
+    letter-spacing:.2em;text-transform:uppercase;margin-bottom:22px;
+  }
+  .hero-eyebrow::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6;}
+  .hero h1{font-size:50px;line-height:1.14;color:var(--white);margin-bottom:20px;letter-spacing:-.01em;}
+  .hero p.lead{font-size:17px;color:rgba(255,255,255,0.86);margin-bottom:30px;max-width:460px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:34px;}
+  .hero-trust{display:flex;gap:26px;flex-wrap:wrap;}
+  .hero-trust-item{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.9);font-size:13px;font-weight:600;}
+  .hero-trust-item svg{width:20px;height:20px;flex-shrink:0;stroke:var(--silver-light);}
+
+  .hero-photo-wrap{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.4);background:linear-gradient(160deg,var(--navy-soft),var(--navy-deep));}
+  .hero-photo-slide{position:absolute;inset:0;background-size:cover;background-position:center 18%;opacity:0;animation:heroPhotoFade 12s infinite;}
+  .hero-photo-slide.slide-1{background-image:url("A.jpeg");animation-delay:0s;}
+  .hero-photo-slide.slide-2{background-image:url("C.jpeg");animation-delay:6s;background-position:center 68%;}
+  @keyframes heroPhotoFade{
+    0%{opacity:0;}
+    6%{opacity:1;}
+    44%{opacity:1;}
+    50%{opacity:0;}
+    100%{opacity:0;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-photo-slide{animation:none;opacity:0;}
+    .hero-photo-slide.slide-1{opacity:1;}
+  }
+  .hero-photo-wrap::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(0deg,rgba(8,43,71,.35),transparent 45%);
+    pointer-events:none;
+  }
+  @media(max-width:900px){
+    .hero{padding:126px 0 56px;}
+    .hero-grid{grid-template-columns:1fr;gap:32px;}
+    .hero h1{font-size:34px;}
+    .hero-photo-wrap{aspect-ratio:16/10;order:-1;}
+  }
+
+  /* Section headings */
+  .section-head{text-align:center;max-width:600px;margin:0 auto 48px;}
+  .section-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Montserrat',sans-serif;color:var(--silver-deep);font-weight:700;font-size:12.5px;
+    letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px;
+  }
+  .section-eyebrow::before{content:"";width:26px;height:1px;background:currentColor;opacity:.55;}
+  .section-head h2{font-size:36px;font-weight:600;line-height:1.24;letter-spacing:-.01em;}
+  .section-head p{color:var(--text-light);margin-top:12px;font-size:16px;}
+
+  /* SOBRE MÍ — ahora arriba, apenas terminado el hero */
+  .about{background:var(--sand);}
+  .about-inner{display:grid;grid-template-columns:.82fr 1.18fr;gap:52px;align-items:center;}
+  .about-photo{position:relative;aspect-ratio:3/4;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);}
+  .about-photo img{width:100%;height:100%;object-fit:cover;}
+  .about-photo-wrap{position:relative;}
+  .about-photo-secondary{
+    position:absolute;right:-24px;bottom:-24px;width:42%;aspect-ratio:3/4;
+    border-radius:12px;overflow:hidden;border:4px solid var(--white);
+    box-shadow:0 16px 34px rgba(15,61,99,.28);
+  }
+  .about-photo-secondary img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+  .about-name{font-size:36px;line-height:1.2;color:var(--navy);margin-bottom:8px;}
+  .about-role{font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-deep);margin-bottom:22px;}
+  .about-quote{position:relative;font-style:italic;color:var(--text);font-size:16.5px;line-height:1.75;margin-bottom:26px;padding-left:24px;}
+  .about-quote::before{
+    content:"\201C";position:absolute;left:-6px;top:-18px;
+    font-family:'Playfair Display',serif;font-style:normal;font-size:76px;
+    color:var(--silver);opacity:.55;line-height:1;
+  }
+  @media(max-width:860px){
+    .about-inner{grid-template-columns:1fr;}
+    .about-photo-wrap{max-width:300px;margin:0 auto;}
+    .about-photo-secondary{right:-14px;bottom:-14px;width:38%;}
+    .about-name,.about-role{text-align:center;}
+  }
+
+  /* SERVICIOS — grilla compacta en vez de 8 bloques enormes */
+  .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .service-card{
+    background:var(--white);border:1px solid rgba(15,61,99,0.09);border-radius:16px;
+    padding:28px 22px;box-shadow:0 8px 22px rgba(15,61,99,.06);
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 38px rgba(15,61,99,.16);
+    border-color:rgba(44,116,179,.35);
+  }
+  .service-icon{width:50px;height:50px;border-radius:12px;background:linear-gradient(160deg,var(--silver-light),var(--ice-deep));display:flex;align-items:center;justify-content:center;margin-bottom:16px;transition:transform .25s ease, background .25s ease;}
+  .service-card:hover .service-icon{transform:scale(1.08) rotate(-4deg);background:linear-gradient(160deg,var(--ice-deep),var(--silver-light));}
+  .service-icon svg{width:24px;height:24px;stroke:var(--navy);fill:none;stroke-width:1.6;transition:stroke .25s ease;}
+  .service-card:hover .service-icon svg{stroke:var(--navy-soft);}
+  .service-card h3{font-size:15.5px;font-weight:700;letter-spacing:.01em;margin-bottom:8px;color:var(--navy);}
+  .service-card p{color:var(--text-light);font-size:13.5px;line-height:1.55;}
+  @media(max-width:900px){.services-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.services-grid{grid-template-columns:1fr;}}
+
+  /* CONFIANZA */
+  .trust{background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:var(--white);}
+  .trust .section-eyebrow{color:var(--silver-light);}
+  .trust .section-head h2{color:var(--white);}
+  .trust .section-head p{color:rgba(255,255,255,0.8);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:44px;}
+  .stat-card{
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;
+    padding:26px 18px;text-align:center;display:flex;flex-direction:column;align-items:center;
+  }
+  .stat-card .stat-icon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .stat-card .stat-icon svg{width:19px;height:19px;stroke:var(--silver-light);fill:none;stroke-width:1.7;}
+  .stat-num{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:700;color:var(--silver-light);display:flex;align-items:center;gap:6px;}
+  .stat-label{font-size:12.5px;color:rgba(255,255,255,0.75);margin-top:6px;line-height:1.4;}
+  .google-mark{display:inline-flex;width:16px;height:16px;}
+
+  .testimonial-carousel{position:relative;max-width:640px;margin:0 auto;}
+  .testimonial-track{position:relative;min-height:140px;}
+  .testimonial{
+    position:absolute;inset:0;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);
+    border-radius:var(--radius);padding:30px;text-align:center;
+    opacity:0;visibility:hidden;transition:opacity .5s ease;
+  }
+  .testimonial.active{opacity:1;visibility:visible;position:relative;}
+  .testimonial p{font-size:16.5px;font-style:italic;margin-bottom:14px;}
+  .testimonial span{font-weight:600;font-size:14px;color:var(--silver-light);}
+  .testimonial-dots{display:flex;justify-content:center;gap:9px;margin-top:22px;}
+  .testimonial-dots button{
+    width:8px;height:8px;border-radius:50%;border:none;background:rgba(255,255,255,.28);
+    cursor:pointer;padding:0;transition:background .2s ease,transform .2s ease;
+  }
+  .testimonial-dots button.active{background:var(--silver-light);transform:scale(1.25);}
+  @media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+
+  /* CONTACTO */
+  .contact-inner{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;}
+  .contact-info{background:var(--sand);border-radius:var(--radius);padding:34px;}
+  .contact-info h3{font-size:19px;margin-bottom:18px;}
+  .contact-item{display:flex;gap:14px;margin-bottom:20px;}
+  .contact-item .ico{width:40px;height:40px;border-radius:11px;background:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;box-shadow:0 4px 12px rgba(15,61,99,.08);}
+  .contact-item strong{display:block;font-size:14.5px;margin-bottom:2px;}
+  .contact-item span{color:var(--text-light);font-size:13.5px;}
+
+  .cta-panel{background:linear-gradient(160deg,var(--navy),var(--navy-deep));border-radius:var(--radius);padding:40px 36px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center;}
+  .cta-panel h3{color:var(--white);font-size:22px;margin-bottom:8px;}
+  .cta-panel>p{color:rgba(255,255,255,.78);font-size:14.5px;margin-bottom:26px;}
+  .cta-btn{
+    display:flex;align-items:center;gap:14px;width:100%;padding:18px 22px;border-radius:14px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);margin-bottom:14px;
+    transition:transform .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .cta-btn:last-child{margin-bottom:0;}
+  .cta-btn:hover{transform:translateY(-3px);background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28);}
+  .cta-btn .cta-ico{width:44px;height:44px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;}
+  .cta-btn.cta-call .cta-ico{background:var(--silver-deep);}
+  .cta-btn strong{display:block;color:var(--white);font-size:15.5px;margin-bottom:2px;}
+  .cta-btn span{color:rgba(255,255,255,.7);font-size:13px;}
+  .cta-note{font-size:12.5px;color:rgba(255,255,255,.55);margin-top:18px;text-align:center;}
+  @media(max-width:860px){.contact-inner{grid-template-columns:1fr;}}
+
+  /* Footer */
+  footer{background:var(--navy-deep);color:rgba(255,255,255,0.75);padding:48px 0 22px;}
+  .footer-inner{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:34px;}
+  .footer-brand h3{font-family:'Montserrat',sans-serif;color:var(--white);font-size:20px;margin-bottom:12px;}
+  .footer-brand p{font-size:14px;line-height:1.7;max-width:280px;}
+  .footer-col h4{color:var(--white);font-size:15px;margin-bottom:14px;}
+  .footer-col ul{list-style:none;}
+  .footer-col li{margin-bottom:9px;font-size:14px;}
+  .footer-col a:hover{color:var(--white);}
+  .social-row{display:flex;gap:12px;margin-top:16px;}
+  .social-row a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;}
+  .social-row a:hover{background:var(--white);color:var(--navy-deep);}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.12);padding-top:18px;text-align:center;font-size:13px;color:rgba(255,255,255,0.55);}
+  @media(max-width:800px){.footer-inner{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.footer-inner{grid-template-columns:1fr;}}
+
+  .wa-float{
+    position:fixed;bottom:24px;right:24px;z-index:90;width:56px;height:56px;border-radius:50%;
+    background:#25D366;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 20px rgba(37,211,102,0.45);font-size:26px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#top" class="logo">
+      <img src="E.jpeg" alt="Logo Odontólogo Lucas Beltrán" class="logo-icon">
+      Lucas <span>Beltrán</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#confianza">Por qué elegirnos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a href="#contacto" class="btn btn-nav nav-cta">Agendá tu turno</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Odontología integral</span>
+      <h1>Tu sonrisa, en <em>las mejores manos</em></h1>
+      <p class="lead">Atención dental cálida y profesional, con tecnología moderna y un trato pensado para que te sientas seguro en cada visita.</p>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn btn-primary">Agendá tu turno</a>
+        <a href="#servicios" class="btn btn-outline btn-outline-light">Ver tratamientos</a>
+      </div>
+      <div class="hero-trust">
+        <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6z"/></svg>Formación clínica actualizada</span>
+        <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Tecnología moderna</span>
+        <span class="hero-trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.3 6.2 21l1.6-6.9L2 9.2l7-.6L12 2l3 6.6 7 .6-5.8 4.9 1.6 6.9z"/></svg>4.9★ de valoración</span>
+      </div>
+    </div>
+
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-slide slide-1"></div>
+      <div class="hero-photo-slide slide-2"></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="sobre-mi">
+  <div class="container about-inner">
+    <div class="about-photo-wrap reveal">
+      <div class="about-photo">
+        <img src="B.jpeg" alt="Odontólogo Lucas Beltrán">
+      </div>
+      <div class="about-photo-secondary">
+        <img src="ponencia-lucas.jpeg" alt="Lucas Beltrán presentando en un congreso odontológico">
+      </div>
+    </div>
+    <div>
+      <div class="section-eyebrow reveal d1">Quién te va a atender</div>
+      <h2 class="about-name reveal d2">Odontólogo Lucas Beltrán</h2>
+      <p class="about-role reveal d2">Universidad Nacional de Río Negro</p>
+      <blockquote class="about-quote reveal d3">
+        "Soy Lucas Beltrán, odontólogo egresado de la Universidad Nacional de Río Negro. Creo en una odontología que empieza por escucharte: entender qué te preocupa antes de proponer cualquier tratamiento, y explicarte cada paso con total claridad, porque tu salud bucal es parte de tu salud general. ¿Cuántas veces postergaste una visita al dentista por temor o porque nadie te lo explicó bien? Elegí esta profesión para cambiar esa historia. Espero poder acompañarte a construir una sonrisa saludable, desde el cuidado, la confianza y el bienestar."
+      </blockquote>
+      <a href="#contacto" class="btn btn-primary reveal d4">Agendá tu consulta</a>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Servicios</div>
+      <h2>Tratamientos para cada necesidad</h2>
+      <p>Desde el cuidado diario hasta procedimientos más complejos, con un enfoque personalizado.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.3 12.3l2.3 2.3 5-5.2"/></svg></div>
+        <h3>Odontología general</h3>
+        <p>Chequeos, diagnóstico y tratamientos de rutina para mantener tu salud bucal bajo control.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2c3 4 5 7.2 5 10a5 5 0 0 1-10 0c0-2.8 2-6 5-10Z"/></svg></div>
+        <h3>Limpieza y periodoncia</h3>
+        <p>Profilaxis y cuidado de encías para prevenir problemas antes de que aparezcan.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 4 8l8 4 8-4-8-4Z"/><path d="M4 12l8 4 8-4"/><path d="M4 16l8 4 8-4"/></svg></div>
+        <h3>Restauradora</h3>
+        <p>Resinas y reconstrucciones estéticas para recuperar la forma y función de tus piezas.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5.5 5.8v5.4C5.5 15.9 8.2 19.4 12 21c3.8-1.6 6.5-5.1 6.5-9.8V5.8L12 3Z"/></svg></div>
+        <h3>Placas para bruxismo</h3>
+        <p>Protección nocturna a medida para aliviar la tensión mandibular y cuidar tus dientes.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 13.7 9.3 19.5 11l-5.8 1.7L12 18.5l-1.7-5.8L4.5 11l5.8-1.7L12 3.5Z"/></svg></div>
+        <h3>Blanqueamiento</h3>
+        <p>Técnicas seguras y efectivas para recuperar el brillo natural de tu sonrisa.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 17v-5.5a7.5 7.5 0 0 1 15 0V17"/><path d="M4.5 17h3.2M16.3 17h3.2M10.4 17h3.2"/></svg></div>
+        <h3>Prótesis fija</h3>
+        <p>Coronas y puentes pensados para devolver funcionalidad y estética a piezas dañadas.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.5h6v3a2.1 2.1 0 1 1 0 3.8v3.7a2.1 2.1 0 1 1 0 3.8v3.2H9v-3.2a2.1 2.1 0 1 1 0-3.8V11.3A2.1 2.1 0 1 1 9 7.5v-3Z"/></svg></div>
+        <h3>Prótesis removibles</h3>
+        <p>Soluciones cómodas y a medida para reemplazar piezas perdidas.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9.3" y="4" width="5.4" height="16" rx="1.4"/><rect x="4" y="9.3" width="16" height="5.4" rx="1.4"/></svg></div>
+        <h3>Cirugía oral</h3>
+        <p>Extracciones y procedimientos quirúrgicos realizados con precisión y cuidado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust" id="confianza">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Por qué elegirnos</div>
+      <h2>Confianza que se nota en cada detalle</h2>
+      <p>Formación actualizada, tecnología moderna y un trato cercano pensado para tu bienestar.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V6z"/></svg></div>
+        <div class="stat-num" style="font-size:15.5px;">Formación actualizada</div>
+        <div class="stat-label">Capacitación clínica constante</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div class="stat-num" style="font-size:15.5px;">Tecnología moderna</div>
+        <div class="stat-label">Equipamiento de última generación</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M8.3 12.3l2.3 2.3 5-5.2"/><circle cx="12" cy="12" r="8.5"/></svg></div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Equipamiento moderno</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-icon">
+          <svg class="google-mark" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.6 16 19 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4c-7.4 0-13.8 4.2-17 10.4z"/><path fill="#4CAF50" d="M24 44c5.2 0 10-2 13.6-5.2l-6.3-5.3C29.3 35.4 26.8 36 24 36c-5.2 0-9.6-3.1-11.3-7.6l-6.5 5C9.9 39.6 16.4 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.2 5.6l6.3 5.3C39.9 37 44 31 44 24c0-1.3-.1-2.7-.4-3.5z"/></svg>
+        </div>
+        <div class="stat-num">4.9<span style="font-size:16px;">★</span></div>
+        <div class="stat-label">Valoración en Google</div>
+      </div>
+    </div>
+    <div class="testimonial-carousel reveal">
+      <div class="testimonial-track">
+        <div class="testimonial active">
+          <p>"El Dr. Beltrán me explicó todo el tratamiento con mucha paciencia y hoy tengo la sonrisa que siempre quise. Un profesional de excelencia."</p>
+          <span>— Marina G., paciente</span>
+        </div>
+        <div class="testimonial">
+          <p>[Ejemplo — reemplazar con una reseña real] "Excelente atención, muy prolijo y detallista en cada paso del tratamiento."</p>
+          <span>— Nombre del paciente</span>
+        </div>
+        <div class="testimonial">
+          <p>[Ejemplo — reemplazar con una reseña real] "Me sentí muy cómoda durante toda la consulta, totalmente recomendable."</p>
+          <span>— Nombre del paciente</span>
+        </div>
+      </div>
+      <div class="testimonial-dots">
+        <button class="active" aria-label="Reseña 1"></button>
+        <button aria-label="Reseña 2"></button>
+        <button aria-label="Reseña 3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Contacto</div>
+      <h2>Agendá tu consulta</h2>
+      <p>Estamos para ayudarte. Contactanos y coordinamos el mejor horario para vos.</p>
+    </div>
+    <div class="contact-inner">
+      <div class="contact-info reveal">
+        <h3>Datos de contacto</h3>
+        <div class="contact-item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.4"/></svg></div><div><strong>Ubicación</strong><span>Córdoba 544, 1er piso</span></div></div>
+        <div class="contact-item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div><div><strong>Horarios</strong><span>Lun a Vie: 9:00–13:00 y 15:00–20:00<br>Sáb: 9:00–13:00</span></div></div>
+        <div class="contact-item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z"/></svg></div><div><strong>Teléfono / WhatsApp</strong><span>+54 9 299 552-9573</span></div></div>
+        <div class="contact-item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4 7l8 6 8-6"/></svg></div><div><strong>Email</strong><span>lucasbeltran97@gmail.com</span></div></div>
+      </div>
+
+      <div class="cta-panel reveal">
+        <h3>Reservá en un toque</h3>
+        <p>Elegí cómo preferís contactarnos y coordinamos tu turno enseguida.</p>
+        <a class="cta-btn" href="https://wa.me/5492995529573?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20consulta%20con%20el%20Odont%C3%B3logo%20Beltr%C3%A1n.%20%C2%BFPodr%C3%ADan%20indicarme%20la%20disponibilidad%3F" target="_blank" rel="noopener">
+          <span class="cta-ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M12 2.5A9.4 9.4 0 0 0 3.8 16.9L2.5 21.5l4.7-1.2A9.4 9.4 0 1 0 12 2.5Zm5.4 13.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.7-1.2-4.5-3.9-4.6-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.2.3-.3.5-.2.2-.3.3-.5.5-.2.2-.3.4-.1.7.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.5.1.6-.1.2-.2.7-.8.9-1 .2-.2.3-.2.6-.1.2.1 1.5.7 1.8.9.3.1.5.2.5.3.1.2.1.6-.1 1.1Z"/></svg></span>
+          <span><strong>Escribir por WhatsApp</strong><span>Respuesta rápida, coordinamos por chat</span></span>
+        </a>
+        <a class="cta-btn cta-call" href="tel:+5492995529573">
+          <span class="cta-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z"/></svg></span>
+          <span><strong>Llamar ahora</strong><span>+54 9 299 552-9573</span></span>
+        </a>
+        <p class="cta-note">Lun a Vie 9:00–13:00 y 15:00–20:00 · Sáb 9:00–13:00</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3>Odontólogo Lucas Beltrán</h3>
+        <p>Odontología general y estética, con un trato humano y profesional en cada consulta.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 8.5h-2a1.5 1.5 0 0 0-1.5 1.5v2h3.3l-.4 3H12v7.5H9v-7.5H7v-3h2v-2.3C9 6.9 10.6 5 13.4 5h2.1v3.5Z"/></svg></a>
+          <a href="https://wa.me/5492995529573?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20consulta%20con%20el%20Odont%C3%B3logo%20Beltr%C3%A1n.%20%C2%BFPodr%C3%ADan%20indicarme%20la%20disponibilidad%3F" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M12 2.5A9.4 9.4 0 0 0 3.8 16.9L2.5 21.5l4.7-1.2A9.4 9.4 0 1 0 12 2.5Zm5.4 13.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.7-1.2-4.5-3.9-4.6-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.2.3-.3.5-.2.2-.3.3-.5.5-.2.2-.3.4-.1.7.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.5.1.6-.1.2-.2.7-.8.9-1 .2-.2.3-.2.6-.1.2.1 1.5.7 1.8.9.3.1.5.2.5.3.1.2.1.6-.1 1.1Z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#confianza">Por qué elegirnos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>Córdoba 544, 1er piso</li>
+          <li>+54 9 299 552-9573</li>
+          <li>lucasbeltran97@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Odontólogo Lucas Beltrán — Odontología. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5492995529573?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20consulta%20con%20el%20Odont%C3%B3logo%20Beltr%C3%A1n.%20%C2%BFPodr%C3%ADan%20indicarme%20la%20disponibilidad%3F" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M12 2.5A9.4 9.4 0 0 0 3.8 16.9L2.5 21.5l4.7-1.2A9.4 9.4 0 1 0 12 2.5Zm5.4 13.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.7-1.2-4.5-3.9-4.6-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.2.1.3 0 .5-.1.2-.2.3-.3.5-.2.2-.3.3-.5.5-.2.2-.3.4-.1.7.2.3.7 1.2 1.6 1.9 1.1.9 2 1.2 2.3 1.4.3.1.5.1.6-.1.2-.2.7-.8.9-1 .2-.2.3-.2.6-.1.2.1 1.5.7 1.8.9.3.1.5.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+</a>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Carrusel de testimonios
+  const testimonials = document.querySelectorAll('.testimonial-carousel .testimonial');
+  const dots = document.querySelectorAll('.testimonial-dots button');
+  let activeTestimonial = 0;
+  function showTestimonial(i) {
+    testimonials.forEach((t, idx) => t.classList.toggle('active', idx === i));
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+    activeTestimonial = i;
+  }
+  dots.forEach((dot, i) => dot.addEventListener('click', () => showTestimonial(i)));
+  if (testimonials.length > 1) {
+    setInterval(() => showTestimonial((activeTestimonial + 1) % testimonials.length), 6000);
+  }
+</script>
+
+</body>
+</html>
